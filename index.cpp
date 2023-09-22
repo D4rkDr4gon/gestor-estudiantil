@@ -42,7 +42,6 @@ void modificar_informacion_estudiante(Estudiante* estudiante) {
     cout << "Información modificada con éxito." << endl;
 }
 
-
 bool validar_email(string email) {
     // Función para validar el formato de un email
     string pattern = R"(\b[A-Za-z0-9._%+-]+@frba.utn.edu.ar\b)";
