@@ -10,6 +10,7 @@ Agustin Mauricio Benitez
 
 #modulo 2
 Participantes: Benitez Agustin Mauricio
+
 Se hicieron dos estructuras llamada Beneficio {} con una variable de tipo global llamada beneficio y otra llamada Aux {} con otra variable global llamada aux. 
 Se crearon 4 funciones dentro del programa:
   -  void agregar_beneficio(); Agrega beneficios al archivo 
