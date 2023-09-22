@@ -105,7 +105,9 @@ void mostrar_menu_beneficios(Estudiante& estudiante, const Beneficio beneficios[
         cout << "1. Mostrar créditos disponibles" << endl;
         cout << "2. Mostrar beneficios disponibles" << endl;
         cout << "3. Acreditar logros" << endl;
-        cout << "4. Cerrar sesión" << endl;
+        cout << "4. mostrar informacion" << endl;
+        cout << "5. modificar mi informacion" << endl;
+        cout << "6. Cerrar sesión" << endl;
 
         int opcion;
         cout << "Elija una opción: ";
@@ -120,7 +122,11 @@ void mostrar_menu_beneficios(Estudiante& estudiante, const Beneficio beneficios[
             cout << "Ingrese la cantidad de puntos a acreditar: ";
             cin >> puntos;
             acreditar_logros(estudiante, puntos);
-        } else if (opcion == 4) {
+        } else if(opcion == 4){
+            ver_informacion_estudiante(estudiante);
+        } else if(opcion == 5) {
+            modificar_informacion_estudiante(estudiante);
+        } else if (opcion == 6) {
             return;
         } else {
             cout << "Opción no válida. Intente nuevamente." << endl;
