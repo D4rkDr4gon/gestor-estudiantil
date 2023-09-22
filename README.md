@@ -1,10 +1,11 @@
 # Proyecto1
 proyecto algoritmos y estructuras de datos, UTN k1024 grupo 10
-Lucciano Campassi
+Lucciano Campassi (213.555-3)
 Mauro Nicolas Fernandez
 Laureano Martinez Moreno
 Agustin Mauricio Benitez
 
+junto con los cuatro modulos se incluye un archivo llamado index.cpp que implemente los 4 modulos como uno con el fin de demostrar el funcionamiento mas realista de este sistema. (implementado por lucciano campassi)
 
 #modulo 1
 
@@ -40,3 +41,39 @@ La séptima y última opción sería la de “Cerrar sesión”. Esta te devuelv
 Para cada cosa que haces, se abren los archivos y la información se guarda cuando salimos completamente del programa (“Registros.dat” y “LogrosyBeneficios.txt”).
 
 #modulo 4
+realizado por lucciano campassi
+esto es un plus al proyecto originalmente planteado q esta incluido en todos los otros modulos de una u otra forma
+
+Descripción General:
+Este código es una aplicación de gestión de estudiantes y beneficios universitarios. Proporciona una interfaz para administradores y estudiantes llevar un registro de datos, acreditar logros y consumir beneficios.
+
+Función de los Administradores:
+Los administradores tienen acceso a un menú especial donde pueden realizar las siguientes acciones:
+
+    Modificar Datos de Estudiante: Esta función permite a los administradores cambiar la contraseña de un estudiante. Solicita el correo electrónico del estudiante y luego permite ingresar la nueva contraseña.
+
+    Agregar Beneficio: Los administradores pueden agregar nuevos beneficios al sistema. Se les pide que ingresen el nombre y el costo del nuevo beneficio en créditos.
+
+    Crear Cuenta de Estudiante: Permite a los administradores registrar nuevos estudiantes en el sistema. Deben ingresar el nombre, correo electrónico y contraseña del nuevo estudiante.
+
+    Guardar Registros: Esta función guarda los datos de los estudiantes y beneficios en archivos específicos. Esto asegura que la información se conserve incluso después de cerrar la aplicación.
+
+    Guardar Logros y Beneficios: Guarda la lista de beneficios disponibles en un archivo de texto legible.
+
+Función de los Estudiantes:
+Los estudiantes también tienen acceso a una serie de opciones:
+
+    Ver Información de la Cuenta: Pueden consultar su información personal, que incluye su nombre, correo electrónico y la cantidad de créditos (méritos) disponibles.
+
+    Acreditar Logros: Esta opción permite a los estudiantes ganar más créditos (méritos) al realizar ciertas actividades o logros académicos. Se les pedirá que ingresen la cantidad de créditos que desean acreditar.
+
+    Consumir Beneficios: Los estudiantes pueden usar sus créditos (méritos) para obtener beneficios específicos. Deben proporcionar el nombre del beneficio que desean adquirir.
+
+Guardando Registros:
+El sistema garantiza que los registros estén seguros y disponibles para futuras sesiones. Para esto, utiliza dos tipos de archivos:
+
+    registros.dat: Almacena información detallada sobre los estudiantes y los beneficios en un formato binario especial.
+
+    logrosYbeneficios.txt: Guarda la lista de beneficios disponibles en un formato de texto fácil de leer.
+
+En resumen, este código proporciona un sistema completo para administradores y estudiantes universitarios. Los administradores pueden gestionar cuentas de estudiantes, beneficios y registros, mientras que los estudiantes pueden ver su información y usar sus créditos para obtener beneficios. La información se guarda en archivos para asegurar su conservación.
