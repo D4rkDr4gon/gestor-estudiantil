@@ -24,7 +24,7 @@ void ver_informacion_estudiante(Estudiante estudiante) {
     cout << "Méritos disponibles: " << estudiante.meritos << endl;
 }
 
-void modificar_informacion_estudiante(Estudiante& estudiante) {
+void modificar_informacion_estudiante(Estudiante* estudiante) {
     cout << "Modificar información del estudiante:" << endl;
     cout << "1. Cambiar nombre" << endl;
     cout << "2. Cambiar contraseña" << endl;
@@ -34,10 +34,10 @@ void modificar_informacion_estudiante(Estudiante& estudiante) {
     cin >> opcion;
     if (opcion == 1) {
         cout << "Nuevo nombre: ";
-        cin >> estudiante.nombre;
+        cin >> estudiante->nombre; // Utilizamos -> para acceder a los miembros del puntero
     } else if (opcion == 2) {
         cout << "Nueva clave: ";
-        cin >> estudiante.clave;
+        cin >> estudiante->clave;
     }
     cout << "Información modificada con éxito." << endl;
 }
@@ -320,7 +320,7 @@ void menu_administracion(Estudiante estudiantes[], int& numEstudiantes, Benefici
                 cout << "Se ha alcanzado el límite de estudiantes." << endl;
             }
         } else if (opcion == "6") {
-            modificar_informacion_estudiante(estudiantes); 
+            modificar_informacion_estudiante(&estudiantes[i]); 
                 
         } else if (opcion == "7") {
             return;
