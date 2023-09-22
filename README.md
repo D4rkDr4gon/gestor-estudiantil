@@ -29,7 +29,7 @@ Todas las funciones modifican el archivo "logrosYbeneficios.txt", que es donde s
 Dentro de cada función se colocaron varíales de tipo "bool" para activar y desactivar diferentes condicionales "if()", permitiendo la opcion de que si no se puede abrir el archivo por un fallo externo no se ejecute el programa. 
 
 #modulo 3
-realizado por mauro nicolas fernandez
+realizado por Mauro Nicolas Fernandez
 
 En esta explicación, vamos a dar detalles técnicos sobre la funcionalidad de nuestro código.
 
