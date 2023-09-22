@@ -9,6 +9,7 @@ Agustin Mauricio Benitez
 #modulo 1
 
 #modulo 2
+
 Participantes: Benitez Agustin Mauricio
 
 Se hicieron dos estructuras llamada Beneficio {} con una variable de tipo global llamada beneficio y otra llamada Aux {} con otra variable global llamada aux. 
