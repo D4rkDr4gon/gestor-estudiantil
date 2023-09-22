@@ -12,16 +12,16 @@ Agustin Mauricio Benitez
 
 Participantes: Benitez Agustin Mauricio
 
-Se hicieron dos estructuras llamada Beneficio {} con una variable de tipo global llamada beneficio y otra llamada Aux {} con otra variable global llamada aux. 
+Se hicieron dos estructuras llamadas "Beneficio {}" con una variable de tipo global llamada "beneficio" y otra llamada "Aux {}" con otra variable global llamada "aux". 
 Se crearon 4 funciones dentro del programa:
-  -  void agregar_beneficio(); Agrega beneficios al archivo 
-  -  void listar_beneficio(); Hace una lista de todos los beneficios guardados 
-  -  void modificar_beneficio(); Permite modificar el nombre y/o costo de los beneficios 
-  -  void eliminar_beneficio(); Te da la opción de eliminar cualquier beneficio almacenado 
+  -  "void agregar_beneficio();" Agrega beneficios al archivo 
+  -  "void listar_beneficio();" Hace una lista de todos los beneficios guardados 
+  -  "void modificar_beneficio();" Permite modificar el nombre y/o costo de los beneficios 
+  -  "void eliminar_beneficio();" Te da la opción de eliminar cualquier beneficio almacenado 
 
-Cada función es llamada dentro de un switch () que contiene 5 opciones, 4 de ellas se encargan de una función diferente. El switch () esta dentro de un Do while () para que se repita el programa siempre y cuando no se elija la ultima opción, la 5, que es donde se encuentra la opción de salir. 
-Todas las funciones modifican el archivo logrosYbeneficios.txt, que es donde se almacenan los beneficios agregados, se optó por el formato .txt para evitar fallos con el compilador, ya que no nos dejaba iniciar el programa con un archivo .dat. 
-Dentro de cada función se colocaron varíales de tipo bool para activar y desactivar diferentes condicionales if(), permitiendo la opcion de que si no se puede abrir el archivo por un fallo externo no se ejecute el programa. 
+Cada función es llamada dentro de un "switch ()2" que contiene 5 opciones, 4 de ellas se encargan de una función diferente. El "switch ()" esta dentro de un "Do while ()" para que se repita el programa siempre y cuando no se elija la ultima opción, la 5, que es donde se encuentra la opción de salir. 
+Todas las funciones modifican el archivo "logrosYbeneficios.txt", que es donde se almacenan los beneficios agregados, se optó por el formato ".txt" para evitar fallos con el compilador, ya que no nos dejaba iniciar el programa con un archivo ".dat". 
+Dentro de cada función se colocaron varíales de tipo "bool" para activar y desactivar diferentes condicionales "if()", permitiendo la opcion de que si no se puede abrir el archivo por un fallo externo no se ejecute el programa. 
 
 #modulo 3
 En esta explicación, vamos a dar detalles técnicos sobre la funcionalidad de nuestro código.
