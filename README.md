@@ -29,8 +29,12 @@ Todas las funciones modifican el archivo "logrosYbeneficios.txt", que es donde s
 Dentro de cada función se colocaron varíales de tipo "bool" para activar y desactivar diferentes condicionales "if()", permitiendo la opcion de que si no se puede abrir el archivo por un fallo externo no se ejecute el programa. 
 
 #modulo 3
+realizado por mauro nicolas fernandez
+
 En esta explicación, vamos a dar detalles técnicos sobre la funcionalidad de nuestro código.
+
 Como objetivos en este módulo, propusimos que el usuario pueda iniciar sesión mediante el uso de un mail y una clave la cual tuvo que crear con anterioridad. Esto lo pudimos hacer haciendo un struct llamado “Estudiante”, en el cual tenía estos términos dentro del mismo: static int numero_legajo; int legajo; string email; string clave; string nombre; int méritos. Para iniciar sesión, al usuario se le darán 2 opciones. La primera sería que el usuario inicie sesión y la segunda opción sería salir del programa lo cual terminaría la programación.
+
 En el inicio de sesión, se toma en cuenta todos los datos guardados en el archivo “Registros.dat” y se chequea que el mail y clave ingresados son los correctos. En el caso de no serlo, el programa te dirá que tus credenciales no son las correctas.
 
 Al ingresar sesión, se despliega el menú de beneficios, el cual tiene varias opciones de las cuales elegir. 
