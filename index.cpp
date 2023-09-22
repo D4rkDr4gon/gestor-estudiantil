@@ -14,7 +14,7 @@ struct Estudiante {
     int meritos;
 };
 
-int numero_legajo = 1; // Inicializar el número de legajo
+int numero_legajo = 1000000; // Inicializar el número de legajo
 
 void ver_informacion_estudiante(Estudiante estudiante) {
     cout << "Información del estudiante:" << endl;
@@ -234,7 +234,7 @@ void mostrar_menu_beneficios(Estudiante& estudiante, const Beneficio beneficios[
         } else if (opcion == 4) {
             ver_informacion_estudiante(estudiante);
         } else if (opcion == 5) {
-            modificar_informacion_estudiante(estudiante);
+            modificar_informacion_estudiante(&estudiante);
         } else if (opcion == 6) {
             return;
         } else {
@@ -319,8 +319,7 @@ void menu_administracion(Estudiante estudiantes[], int& numEstudiantes, Benefici
                 cout << "Se ha alcanzado el límite de estudiantes." << endl;
             }
         } else if (opcion == "6") {
-            modificar_informacion_estudiante(&estudiantes[i]); 
-                
+            modificar_informacion_estudiante(estudiantes);
         } else if (opcion == "7") {
             return;
         } else {
@@ -430,6 +429,7 @@ int main() {
         } else if (opcion == 4) {
             guardar_registros(estudiantes, numEstudiantes, beneficios, numBeneficios);
             guardar_logros_y_beneficios(beneficios, numBeneficios);
+            cout << "Gracias por usar el sistema. ¡Hasta luego!" << endl;
             break;
         } else {
             cout << "Opción no válida. Intente nuevamente." << endl;
