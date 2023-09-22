@@ -26,8 +26,9 @@ void eliminar_beneficio();
 int main(){
 int opc;
 
+do{
 //Menu de pantalla de beneficios
-        cout<<"Gestor de beneficios               ";              
+        cout<<"\nGestor de beneficios             ";              
         cout<<"\n 1. Agregar                      ";
         cout<<"\n 2. Listar                       ";
         cout<<"\n 3. Modificar costo/nombre       ";
@@ -36,7 +37,6 @@ int opc;
         cout<<"\n---------------------------------";
         cout<<"\nOperacion: ";
 //Opciones de beneficios
-do{
     cin>>opc;
     cin.ignore();
 	switch(opc){
@@ -55,7 +55,7 @@ do{
 //Definicion de funcion
 void agregar_beneficio(){
     bool band = false;		    
-    FILE* archivo = fopen("Registros_Beneficios.dat","ab");
+    FILE* archivo = fopen("logrosYbeneficios.txt","ab");
     	if(archivo == NULL){
             cout<<"\nNo se pudo abrir el archivo.";
             cout<<"\n---------------------------------";
@@ -70,18 +70,16 @@ void agregar_beneficio(){
         fwrite(&beneficio,sizeof(Beneficio),1,archivo);
 		fclose(archivo);
 	    	cout<<"\nBeneficio agregado con exito";
-                cout<<"\n---------------------------------";
-	    	cout<<"\nNueva operacion: ";
+            cout<<"\n---------------------------------";
     }
 }
 
 void listar_beneficio(){
     bool band = false;
-    FILE* archivo = fopen("Registros_Beneficios.dat","rb");
+    FILE* archivo = fopen("logrosYbeneficios.txt","rb");
         if(archivo == NULL){
             cout<<"\nNo se pudo abrir el archivo.";
             cout<<"\n---------------------------------";
-	        cout<<"\nNueva operacion: ";
             band = true;
         }
 
@@ -90,18 +88,16 @@ void listar_beneficio(){
                 cout<<"Nombre: "<<beneficio.nombre<<", Costo: "<<beneficio.costo<<endl;
             }
             cout<<"\n---------------------------------";
-            cout<<"\nNueva operacion: ";
             fclose(archivo);
         }
 }
 
 void modificar_beneficio(){
     bool band=false;
-    FILE* archivo = fopen("Registros_Beneficios.dat", "rb+");
+    FILE* archivo = fopen("logrosYbeneficios.txt", "rb+");
         if (archivo == NULL) {
             cout<<"\nNo se pudo abrir el archivo.";
             cout<<"\n---------------------------------";
-            cout<<"\nNueva operacion: ";
             band = true;
         }
 
@@ -129,11 +125,9 @@ void modificar_beneficio(){
         if(buscar == true){
             cout<<"\nBeneficio modificado con exito.";
             cout<<"\n---------------------------------";
-            cout<<"\nNueva operacion: ";
         }else{
             cout<<"\nBeneficio no encontrado.";
             cout<<"\n---------------------------------";
-            cout<<"\nNueva operacion: ";
         }
     }
 }
@@ -141,11 +135,10 @@ void modificar_beneficio(){
 void eliminar_beneficio(){
     bool band = false;
     
-    FILE* archivo = fopen("Registros_Beneficios.dat", "rb+");
+    FILE* archivo = fopen("logrosYbeneficios.txt", "rb+");
     if(archivo == NULL){
         cout<<"\nNo se pudo abrir el archivo.";
         cout<<"\n---------------------------------";
-	    cout<<"\nNueva operacion: ";
         band = true;
     } 
 
@@ -165,20 +158,17 @@ void eliminar_beneficio(){
             fclose(archivoTemporal);
         
         if(buscar == true){
-            if(remove("Registros_Beneficios.dat") == 0 &&
-                rename("temporal.dat", "Registros_Beneficios.dat") == 0){
+            if(remove("logrosYbeneficios.txt") == 0 &&
+                rename("temporal.dat", "logrosYbeneficios.txt") == 0){
                 cout<<"\nBeneficio eliminado con exito.";
                 cout<<"\n---------------------------------";
-	    	    cout<<"\nNueva operacion: ";
             }else{
                     cout<<"\nError al renombrar el archivo.";
                     cout<<"\n---------------------------------";
-	    	        cout<<"\nNueva operacion: ";
             }
         }else{
                 cout<<"\nBeneficio no encontrado.";
                 cout<<"\n---------------------------------";
-	            cout<<"\nNueva operacion: ";
                 remove("temporal.dat"); // Eliminar el archivo temporal si no se realizó ninguna modificación.
         }
     }
