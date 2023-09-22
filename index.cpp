@@ -320,8 +320,8 @@ void menu_administracion(Estudiante estudiantes[], int& numEstudiantes, Benefici
                 cout << "Se ha alcanzado el límite de estudiantes." << endl;
             }
         } else if (opcion == "6") {
-            // Agregar lógica para modificar información de estudiante aquí
-            cout << "Función para modificar información de estudiante aún no implementada." << endl;
+            modificar_informacion_estudiante(estudiantes); 
+                
         } else if (opcion == "7") {
             return;
         } else {
