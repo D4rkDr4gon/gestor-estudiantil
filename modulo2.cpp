@@ -1,239 +1,203 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
+#include<iostream>
+#include<string.h>
+#include<string>
 using namespace std;
 
-struct Estudiante {
-    static int numero_legajo;
-    int legajo;
-    string email;
-    string clave;
-    string nombre;
-    int meritos;
-
-    Estudiante(string nombre, string email, string clave)
-        : legajo(numero_legajo++), email(email), clave(clave), nombre(nombre), meritos(1000) {}
-
-    void ver_informacion() {
-        cout << "Información del estudiante:" << endl;
-        cout << "Legajo: " << legajo << endl;
-        cout << "Nombre: " << nombre << endl;
-        cout << "Email: " << email << endl;
-        cout << "Méritos disponibles: " << meritos << endl;
-    }
-
-    void modificar_informacion() {
-        cout << "Modificar información del estudiante:" << endl;
-        cout << "1. Cambiar nombre" << endl;
-        cout << "2. Cambiar contraseña" << endl;
-        cout << "3. Salir" << endl;
-        string opcion;
-        cout << "¿Qué desea hacer?: ";
-        cin >> opcion;
-
-        if (opcion == "1") {
-            cout << "Nuevo nombre: ";
-            cin >> nombre;
-        } else if (opcion == "2") {
-            cout << "Nueva clave: ";
-            cin >> clave;
-        } else if (opcion == "3") {
-            return;
-        } else {
-            cout << "Opción no válida." << endl;
-        }
-
-        cout << "Información modificada con éxito." << endl;
-    }
+//Declaracion de estructuras
+struct Beneficio{
+	char nombre[50];
+	int costo;
 };
-
-int Estudiante::numero_legajo = 1;
-
-struct Beneficio {
-    string nombre;
-    int costo;
-
-    Beneficio(string nombre, int costo) : nombre(nombre), costo(costo) {}
+struct Aux{
+        char nombreBeneficio[50];
+        char nuevoNombre[50];
+        int nuevoCosto;
 };
+//Variables globales
+Beneficio beneficio;
+Aux aux;
 
-void agregar_beneficio(vector<Beneficio>& beneficios, string nombre, int costo) {
-    beneficios.push_back(Beneficio(nombre, costo));
-    cout << "Beneficio agregado exitosamente." << endl;
+//Prototipo de funcion
+void agregar_beneficio();
+void listar_beneficio();
+void modificar_beneficio();
+void eliminar_beneficio();
+
+//Funcion principal
+int main(){
+int opc;
+
+//Menu de pantalla de beneficios
+        cout<<"Gestor de beneficios               ";              
+        cout<<"\n 1. Agregar                      ";
+        cout<<"\n 2. Listar                       ";
+        cout<<"\n 3. Modificar costo/nombre       ";
+        cout<<"\n 4. Eliminar                     ";
+        cout<<"\n 5. Salir                        ";
+        cout<<"\n---------------------------------";
+        cout<<"\nOperacion: ";
+//Opciones de beneficios
+do{
+    cin>>opc;
+    cin.ignore();
+	switch(opc){
+		case 1: agregar_beneficio();                        break;
+		case 2: listar_beneficio();                         break;
+		case 3: modificar_beneficio();                      break;
+		case 4: eliminar_beneficio();                       break;
+		case 5: cout<<"\nDatos actualizados exitosamente";
+                cout<<"\n---------------------------------";break;
+		default: cout<<"\nOpcion invalida, por favor ingrese"; 
+		         cout<<"\nuna nueva operacion: ";break;
+	} 
+}while(opc != 5);
 }
 
-void listar_beneficios(const vector<Beneficio>& beneficios) {
-    cout << "Beneficios disponibles:" << endl;
-    for (const Beneficio& beneficio : beneficios) {
-        cout << beneficio.nombre << " - Costo: " << beneficio.costo << " créditos" << endl;
+//Definicion de funcion
+void agregar_beneficio(){
+    bool band = false;
+			    
+	FILE* archivo = fopen("Registros_Beneficios.dat","ab");
+    	if(archivo == NULL){
+            cout<<"\nNo se pudo abrir el archivo.";
+            cout<<"\n---------------------------------";
+	    	cout<<"\nNueva operacion: ";
+            band = true;
+        }
+    
+    if(band == false){
+        cout<<"Nombre: ";
+     	cin.getline(beneficio.nombre,sizeof(beneficio.nombre));
+    	cout<<"Costo: ";
+    	cin>>beneficio.costo;
+        cin.ignore();
+
+        fwrite(&beneficio,sizeof(Beneficio),1,archivo);
+		fclose(archivo);
+	    	cout<<"\nBeneficio agregado con exito";
+            cout<<"\n---------------------------------";
+	    	cout<<"\nNueva operacion: ";
     }
 }
 
-void acreditar_logros(Estudiante& estudiante, int puntos) {
-    estudiante.meritos += puntos;
-    cout << "Se acreditaron " << puntos << " puntos. Méritos disponibles: " << estudiante.meritos << endl;
-}
+void listar_beneficio(){
+    bool band = false;
 
-void iniciar_sesion(vector<Estudiante>& estudiantes, vector<Beneficio>& beneficios) {
-    string email, clave;
-    cout << "Ingrese su email: ";
-    cin >> email;
-    cout << "Ingrese su clave: ";
-    cin >> clave;
-
-    for (Estudiante& estudiante : estudiantes) {
-        if (estudiante.email == email && estudiante.clave == clave) {
-            cout << "Inicio de sesión exitoso." << endl;
-            mostrar_menu_beneficios(estudiante, beneficios);
-            return;
-        }
+    FILE* archivo = fopen("Registros_Beneficios.dat","rb");
+    if(archivo == NULL){
+        cout<<"\nNo se pudo abrir el archivo.";
+        cout<<"\n---------------------------------";
+		cout<<"\nNueva operacion: ";
+        band = true;
     }
 
-    cout << "Credenciales incorrectas." << endl;
-}
-
-void mostrar_menu_beneficios(Estudiante& estudiante, vector<Beneficio>& beneficios) {
-    while (true) {
-        cout << "\n--- Menú de Beneficios ---" << endl;
-        cout << "1. Mostrar créditos disponibles" << endl;
-        cout << "2. Mostrar beneficios disponibles" << endl;
-        cout << "3. Acreditar logros" << endl;
-        cout << "4. Cerrar sesión" << endl;
-        string opcion;
-        cout << "Elija una opción: ";
-        cin >> opcion;
-
-        if (opcion == "1") {
-            cout << "Créditos disponibles: " << estudiante.meritos << endl;
-        } else if (opcion == "2") {
-            listar_beneficios(beneficios);
-        } else if (opcion == "3") {
-            int puntos;
-            cout << "Ingrese la cantidad de puntos a acreditar: ";
-            cin >> puntos;
-            acreditar_logros(estudiante, puntos);
-        } else if (opcion == "4") {
-            return;
-        } else {
-            cout << "Opción no válida. Intente nuevamente." << endl;
+    if(band == false){
+	    while(fread(&beneficio,sizeof(Beneficio),1,archivo) == 1){
+            cout<<"Nombre: "<<beneficio.nombre<<", Costo: "<<beneficio.costo<<endl;
         }
-    }
-}
-
-struct Administrador {
-    string username;
-    string password;
-
-    Administrador(string username, string password)
-        : username(username), password(password) {}
-};
-
-bool autenticar_administrador(const vector<Administrador>& administradores, const string& username, const string& password) {
-    for (const Administrador& admin : administradores) {
-        if (admin.username == username && admin.password == password) {
-            return true;
-        }
-    }
-    return false;
-}
-
-void menu_administracion(vector<Estudiante>& estudiantes, vector<Beneficio>& beneficios) {
-    while (true) {
-        cout << "\n--- Menú de Administración ---" << endl;
-        cout << "1. Agregar beneficio" << endl;
-        cout << "2. Salir" << endl;
-        string opcion;
-        cout << "Elija una opción: ";
-        cin >> opcion;
-
-        if (opcion == "1") {
-            string nombre;
-            int costo;
-            cout << "Ingrese el nombre del beneficio: ";
-            cin >> nombre;
-            cout << "Ingrese el costo del beneficio en créditos: ";
-            cin >> costo;
-            agregar_beneficio(beneficios, nombre, costo);
-        } else if (opcion == "2") {
-            return;
-        } else {
-            cout << "Opción no válida. Intente nuevamente." << endl;
-        }
-    }
-}
-
-void guardar_registros(const vector<Estudiante>& estudiantes, const vector<Beneficio>& beneficios) {
-    FILE* archivo = fopen("registros.dat", "wb");
-    if (archivo) {
-        for (const Estudiante& estudiante : estudiantes) {
-            fwrite(&estudiante, sizeof(Estudiante), 1, archivo);
-        }
+            cout<<"\n---------------------------------";
+        	cout<<"\nNueva operacion: ";
         fclose(archivo);
-        cout << "Registros guardados exitosamente." << endl;
-    } else {
-        cout << "No se pudo abrir el archivo de registros." << endl;
     }
 }
 
-void cargar_registros(vector<Estudiante>& estudiantes) {
-    FILE* archivo = fopen("registros.dat", "rb");
-    if (archivo) {
-        estudiantes.clear();
-        Estudiante estudiante;
-        while (fread(&estudiante, sizeof(Estudiante), 1, archivo)) {
-            estudiantes.push_back(estudiante);
-        }
-        fclose(archivo);
-        cout << "Registros cargados exitosamente." << endl;
-    } else {
-        cout << "No se encontró el archivo de registros." << endl;
+void modificar_beneficio(){
+    bool band=false;
+    
+    FILE* archivo = fopen("Registros_Beneficios.dat", "rb+");
+    if (archivo == NULL) {
+        cout<<"\nNo se pudo abrir el archivo.";
+        cout<<"\n---------------------------------";
+        cout<<"\nNueva operacion: ";
+        band = true;
     }
-}
 
-int main() {
-    vector<Beneficio> beneficios;
-    vector<Administrador> administradores;
-    vector<Estudiante> estudiantes;
+    if(band == false){
+    
+    cout<<"Nombre del beneficio a modificar: ";
+    cin.getline(aux.nombreBeneficio, 50);
+    cout<<"Nuevo nombre: ";
+    cin.getline(aux.nuevoNombre, 50);
+    cout<<"Nuevo costo: ";
+    cin>>aux.nuevoCosto;
 
-    administradores.push_back(Administrador("admin1", "contraseña1"));
-    administradores.push_back(Administrador("admin2", "contraseña2"));
+    cin.ignore();
 
-    cargar_registros(estudiantes);
-
-    while (true) {
-        cout << "\n--- Menú Principal ---" << endl;
-        cout << "1. Iniciar sesión como estudiante" << endl;
-        cout << "2. Iniciar sesión como administrador" << endl;
-        cout << "3. Salir" << endl;
-        string opcion;
-        cout << "Elija una opción: ";
-        cin >> opcion;
-
-        if (opcion == "1") {
-            iniciar_sesion(estudiantes, beneficios);
-        } else if (opcion == "2") {
-            while (true) {
-                string username, password;
-                cout << "Ingrese el nombre de usuario del administrador: ";
-                cin >> username;
-                cout << "Ingrese la contraseña del administrador: ";
-                cin >> password;
-
-                if (autenticar_administrador(administradores, username, password)) {
-                    cout << "Inicio de sesión de administrador exitoso." << endl;
-                    menu_administracion(estudiantes, beneficios);
-                    break;
-                } else {
-                    cout << "Credenciales de administrador incorrectas. Intente nuevamente." << endl;
-                }
+    bool buscar = false;
+       while (fread(&beneficio, sizeof(Beneficio), 1, archivo) == 1){
+            if (strcmp(beneficio.nombre,aux.nombreBeneficio) == 0){
+                
+                // Modificar el nombre y el costo
+                strcpy(beneficio.nombre, aux.nuevoNombre);
+                beneficio.costo = aux.nuevoCosto;
+                buscar = true;
+                
+                // Mueve la posición actual de lectura/escritura hacia atrás para sobrescribir el registro
+                fseek(archivo, -static_cast<long>(sizeof(Beneficio)), SEEK_CUR);
+                fwrite(&beneficio, sizeof(Beneficio), 1, archivo);
+                break; // Termina la búsqueda ya que se encontró y modificó el beneficio
             }
-        } else if (opcion == "3") {
-            guardar_registros(estudiantes, beneficios);
-            break;
-        } else {
-            cout << "Opción no válida. Intente nuevamente." << endl;
+        }
+
+     fclose(archivo);
+
+        if(buscar == true) {
+            cout<<"\nBeneficio modificado con exito.";
+            cout<<"\n---------------------------------";
+            cout<<"\nNueva operacion: ";
+        }else {
+            cout<<"\nBeneficio no encontrado.";
+            cout<<"\n---------------------------------";
+            cout<<"\nNueva operacion: ";
         }
     }
+}
 
-    return 0;
+void eliminar_beneficio(){
+    bool band = false;
+
+    FILE* archivo = fopen("Registros_Beneficios.dat", "rb+");
+        if(archivo == NULL){
+            cout<<"\nNo se pudo abrir el archivo.";
+            cout<<"\n---------------------------------";
+	    	cout<<"\nNueva operacion: ";
+           band = true;
+        }       
+
+    if(band == false){
+        cout<<"Nombre del beneficio a eliminar: ";
+        cin.getline(aux.nombreBeneficio,50);
+        cin.ignore();
+
+        FILE* archivoTemporal = fopen("temporal.dat", "wb+");  
+    
+        bool buscar = false;
+
+        while(fread(&beneficio.nombre, sizeof(Beneficio), 1, archivo) == 1){
+            if(strcmp(beneficio.nombre, aux.nombreBeneficio) != 0){
+                fwrite(&beneficio.nombre, sizeof(Beneficio), 1, archivoTemporal);
+                buscar = true;
+            }
+        }
+            fclose(archivo);
+            fclose(archivoTemporal);
+
+            if(buscar == true){
+                if(remove("Registros_Beneficios.dat") == 0 &&
+                    rename("temporal.dat", "Registros_Beneficios.dat") == 0){
+                    cout<<"\nBeneficio eliminado con exito.";
+                    cout<<"\n---------------------------------";
+	    	        cout<<"\nNueva operacion: ";
+                }else{
+                    cout<<"\nError al renombrar el archivo.";
+                    cout<<"\n---------------------------------";
+	    	        cout<<"\nNueva operacion: ";
+                }
+            }else{
+                cout<<"\nBeneficio no encontrado.";
+                cout<<"\n---------------------------------";
+	        	cout<<"\nNueva operacion: ";
+                remove("temporal.dat"); // Eliminar el archivo temporal si no se realizó ninguna modificación.
+            }
+    }
 }
