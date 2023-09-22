@@ -1,5 +1,6 @@
 # Proyecto1
 proyecto algoritmos y estructuras de datos, UTN k1024 grupo 10
+Video de youtube del proyecto: https://youtu.be/Dg7rPR5ivvM?feature=shared
 
 Lucciano Campassi (213.555-3)
 
