@@ -55,91 +55,76 @@ do{
 
 //Definicion de funcion
 void agregar_beneficio(){
-    bool band = false;
-			    
-	FILE* archivo = fopen("Registros_Beneficios.dat","ab");
+    bool band = false;		    
+    FILE* archivo = fopen("Registros_Beneficios.dat","ab");
     	if(archivo == NULL){
             cout<<"\nNo se pudo abrir el archivo.";
             cout<<"\n---------------------------------";
-	    	cout<<"\nNueva operacion: ";
+	    cout<<"\nNueva operacion: ";
             band = true;
         }
-    
     if(band == false){
-        cout<<"Nombre: ";
-     	cin.getline(beneficio.nombre,sizeof(beneficio.nombre));
-    	cout<<"Costo: ";
-    	cin>>beneficio.costo;
+        cout<<"Nombre: "; cin.getline(beneficio.nombre,sizeof(beneficio.nombre));
+    	cout<<"Costo: "; cin>>beneficio.costo;
         cin.ignore();
 
         fwrite(&beneficio,sizeof(Beneficio),1,archivo);
 		fclose(archivo);
 	    	cout<<"\nBeneficio agregado con exito";
-            cout<<"\n---------------------------------";
+                cout<<"\n---------------------------------";
 	    	cout<<"\nNueva operacion: ";
     }
 }
 
 void listar_beneficio(){
     bool band = false;
-
     FILE* archivo = fopen("Registros_Beneficios.dat","rb");
-    if(archivo == NULL){
-        cout<<"\nNo se pudo abrir el archivo.";
-        cout<<"\n---------------------------------";
-		cout<<"\nNueva operacion: ";
-        band = true;
-    }
+        if(archivo == NULL){
+            cout<<"\nNo se pudo abrir el archivo.";
+            cout<<"\n---------------------------------";
+	    cout<<"\nNueva operacion: ";
+            band = true;
+        }
 
-    if(band == false){
+        if(band == false){
 	    while(fread(&beneficio,sizeof(Beneficio),1,archivo) == 1){
             cout<<"Nombre: "<<beneficio.nombre<<", Costo: "<<beneficio.costo<<endl;
         }
             cout<<"\n---------------------------------";
-        	cout<<"\nNueva operacion: ";
+            cout<<"\nNueva operacion: ";
         fclose(archivo);
     }
 }
 
 void modificar_beneficio(){
     bool band=false;
-    
     FILE* archivo = fopen("Registros_Beneficios.dat", "rb+");
-    if (archivo == NULL) {
-        cout<<"\nNo se pudo abrir el archivo.";
-        cout<<"\n---------------------------------";
-        cout<<"\nNueva operacion: ";
-        band = true;
-    }
-
+        if (archivo == NULL) {
+            cout<<"\nNo se pudo abrir el archivo.";
+            cout<<"\n---------------------------------";
+            cout<<"\nNueva operacion: ";
+            band = true;
+        }
     if(band == false){
-    
-    cout<<"Nombre del beneficio a modificar: ";
-    cin.getline(aux.nombreBeneficio, 50);
-    cout<<"Nuevo nombre: ";
-    cin.getline(aux.nuevoNombre, 50);
-    cout<<"Nuevo costo: ";
-    cin>>aux.nuevoCosto;
-
+        cout<<"Nombre del beneficio a modificar: "; cin.getline(aux.nombreBeneficio, 50);
+        cout<<"Nuevo nombre: "; cin.getline(aux.nuevoNombre, 50);
+        cout<<"Nuevo costo: "; cin>>aux.nuevoCosto;
     cin.ignore();
 
     bool buscar = false;
        while (fread(&beneficio, sizeof(Beneficio), 1, archivo) == 1){
             if (strcmp(beneficio.nombre,aux.nombreBeneficio) == 0){
-                
-                // Modificar el nombre y el costo
+        // Modificar el nombre y el costo
                 strcpy(beneficio.nombre, aux.nuevoNombre);
                 beneficio.costo = aux.nuevoCosto;
                 buscar = true;
-                
-                // Mueve la posición actual de lectura/escritura hacia atrás para sobrescribir el registro
+        // Mueve la posición actual de lectura/escritura hacia atrás para sobrescribir el registro
                 fseek(archivo, -static_cast<long>(sizeof(Beneficio)), SEEK_CUR);
                 fwrite(&beneficio, sizeof(Beneficio), 1, archivo);
                 break; // Termina la búsqueda ya que se encontró y modificó el beneficio
             }
         }
-
-     fclose(archivo);
+        fclose(archivo);
 
         if(buscar == true) {
             cout<<"\nBeneficio modificado con exito.";
@@ -155,24 +140,19 @@ void modificar_beneficio(){
 
 void eliminar_beneficio(){
     bool band = false;
-
     FILE* archivo = fopen("Registros_Beneficios.dat", "rb+");
         if(archivo == NULL){
             cout<<"\nNo se pudo abrir el archivo.";
             cout<<"\n---------------------------------";
-	    	cout<<"\nNueva operacion: ";
-           band = true;
+	    cout<<"\nNueva operacion: ";
+            band = true;
         }       
-
     if(band == false){
-        cout<<"Nombre del beneficio a eliminar: ";
-        cin.getline(aux.nombreBeneficio,50);
+        cout<<"Nombre del beneficio a eliminar: "; cin.getline(aux.nombreBeneficio,50);
         cin.ignore();
-
-        FILE* archivoTemporal = fopen("temporal.dat", "wb+");  
-    
+	    
         bool buscar = false;
-
+   FILE* archivoTemporal = fopen("temporal.dat", "wb+");  
         while(fread(&beneficio.nombre, sizeof(Beneficio), 1, archivo) == 1){
             if(strcmp(beneficio.nombre, aux.nombreBeneficio) != 0){
                 fwrite(&beneficio.nombre, sizeof(Beneficio), 1, archivoTemporal);
@@ -187,16 +167,16 @@ void eliminar_beneficio(){
                     rename("temporal.dat", "Registros_Beneficios.dat") == 0){
                     cout<<"\nBeneficio eliminado con exito.";
                     cout<<"\n---------------------------------";
-	    	        cout<<"\nNueva operacion: ";
+	    	    cout<<"\nNueva operacion: ";
                 }else{
                     cout<<"\nError al renombrar el archivo.";
                     cout<<"\n---------------------------------";
-	    	        cout<<"\nNueva operacion: ";
+	    	    cout<<"\nNueva operacion: ";
                 }
             }else{
                 cout<<"\nBeneficio no encontrado.";
                 cout<<"\n---------------------------------";
-	        	cout<<"\nNueva operacion: ";
+	        cout<<"\nNueva operacion: ";
                 remove("temporal.dat"); // Eliminar el archivo temporal si no se realizó ninguna modificación.
             }
     }
