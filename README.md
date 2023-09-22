@@ -1,8 +1,12 @@
 # Proyecto1
 proyecto algoritmos y estructuras de datos, UTN k1024 grupo 10
+
 Lucciano Campassi (213.555-3)
+
 Mauro Nicolas Fernandez
+
 Laureano Martinez Moreno
+
 Agustin Mauricio Benitez
 
 junto con los cuatro modulos se incluye un archivo llamado index.cpp que implemente los 4 modulos como uno con el fin de demostrar el funcionamiento mas realista de este sistema. (implementado por lucciano campassi)
@@ -41,7 +45,9 @@ La séptima y última opción sería la de “Cerrar sesión”. Esta te devuelv
 Para cada cosa que haces, se abren los archivos y la información se guarda cuando salimos completamente del programa (“Registros.dat” y “LogrosyBeneficios.txt”).
 
 #modulo 4
+
 realizado por lucciano campassi
+
 esto es un plus al proyecto originalmente planteado q esta incluido en todos los otros modulos de una u otra forma
 
 Descripción General:
